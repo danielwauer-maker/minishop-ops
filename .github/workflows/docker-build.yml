@@ -1,11 +1,15 @@
-name: CI - Lint, Test, Docker Build
+name: CI/CD - Lint, Test, Build & Push (GHCR)
 
 on:
   push:
     branches: [ "master" ]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
-  lint-test-build:
+  lint-test-build-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,5 +31,14 @@ jobs:
       - name: Run tests
         run: pytest -q app
 
-      - name: Build Docker image
-        run: docker build -t minishop-ops:ci ./app
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository_owner }}/minishop-ops:latest ./app
+          docker push ghcr.io/${{ github.repository_owner }}/minishop-ops:latest
