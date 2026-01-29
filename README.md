@@ -10,9 +10,7 @@ Ziel:
 
 \- DevOps von Grund auf lernen
 
-\- Alles Schritt für Schritt
+\- Schritt für Schritt
 
-\- Fokus auf Praxis statt Theorie
-
-
+\- Praxisorientiert
 
