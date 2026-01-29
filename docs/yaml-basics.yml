@@ -1,0 +1,11 @@
+name: YAML Basics
+
+info:
+  purpose: Learn YAML
+  level: beginner
+
+steps:
+  - name: step-one
+    description: First step
+  - name: step-two
+    description: Second step
